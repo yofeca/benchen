@@ -1,0 +1,93 @@
+<!--New Featured Listing HTML-->
+<!--
+Classes:
+hidden: hides the html template from the site
+featured-custom: serves as the container for the whole featured listing item
+featured-link: link to the listing's page, must be added to an anchor <a> tag (ex. "/3")
+featured-image: filepath to the image, must be added to an image <img> tag (ex. "http://storage.ubertor.com/benchen.ourubertor.com/listing/ListingImage_3_image/26.jpg")
+featured-image-background: gives the element a background with the listing's photo
+featured-price: contains the listing's price
+featured-address: contains the address of the listing (ex. "##330 - 1085 Homer Street")
+featured-area: comtains the listing area (ex. "10,000 sq.ft.")
+featured-bedroom: contains the number of bedrooms the listing has (ex. "5 bed")
+featured-bathroom: contains the number of bathrooms the listing has (ex. 2 full & 1 half baths)
+--->
+<div class="featured-custom hidden">
+<a class="featured-link">
+<div id="box" class="featured-image-background">
+ <div id="overlay">
+ <div class="featured-details">
+ <span id="plus" class="featured-address">Address</span><br>
+ <span id="plus" class="featured-price">Price</span><br>
+ <span id="plus" class="featured-area">Area</span>
+ </div>
+ </div> 
+</div>
+</a> 
+</div>
+<!---->
+
+<style>
+/*important*/
+.hidden {
+ display: none;
+}
+/*end of important*/
+
+
+</style>
+
+<script>
+jQuery.noConflict();
+(function( $ ) {
+ $(function() {
+
+ //get 3rd listing
+ //$('#feature_listings .row').eq(0).html('');
+ var thirdListing = $('#feature_listings .row').eq(0).children('.item').eq(2).html();
+ var thirdListingID = $('#feature_listings .row').eq(0).children('.item').eq(2).attr('id');
+ var thirdListingClass = $('#feature_listings .row').eq(0).children('.item').eq(2).attr('class');
+ //remove third listing
+ $('#feature_listings .row').eq(0).children('.item').eq(2).remove();
+ //add 3rd listing to the row below
+ $('#feature_listings .row').eq(1).prepend('<div class="'+thirdListingClass+'" id="'+thirdListingID+'">'+thirdListing+'</div>'); 
+ 
+ /*custom HTML for featured listings*/ 
+ var link, image, address, price, area, bedroom, bathroom, newHTML;
+ $('#feature_listings .item').each(function(index){
+ link = $(this).children('.address').children('a').attr('href');
+ image = $(this).children('a').children('img').attr('src');
+ address = $.trim($(this).children('.address').children('a').html());
+ price = $(this).children('.listing-meta').children('.price').html();
+ area = $(this).children('.listing-meta').children('.wlisting-detail').children('.area').html();
+ bedroom = $(this).children('.listing-meta').children('.wlisting-detail').children('.bedroom').html();
+ bathroom = $(this).children('.listing-meta').children('.wlisting-detail').children('.bathroom').html();
+
+ $('.featured-custom .featured-link').attr('href',link);
+ $('.featured-custom .featured-image').attr('src',image);
+ $('.featured-custom .featured-image-background').css('background','url("'+image+'")');
+ $('.featured-custom .featured-price').html(price);
+ $('.featured-custom .featured-address').html(address);
+ $('.featured-custom .featured-area').html(area);
+ $('.featured-custom .featured-bedroom').html(bedroom);
+ $('.featured-custom .featured-bathroom').html(bathroom);
+ $(this).html($('.featured-custom').html());
+ /*end of custom HTML for featured listings*/
+ 
+ $(this).removeClass('col-md-4');
+ $(this).addClass('col-md-6');
+ });
+ 
+ 
+
+ //$(window).bind("load", function() {
+ var rawForm = $('#form_search_board_listings_2').html();
+ while(rawForm.indexOf('Select ') != -1) {
+ rawForm = rawForm.replace('Select','');
+ }
+ $('#form_search_board_listings_2').html(""+rawForm);
+ //});
+ 
+ });
+})(jQuery); 
+</script>
