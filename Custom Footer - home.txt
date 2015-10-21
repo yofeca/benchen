@@ -33,14 +33,11 @@ featured-bathroom: contains the number of bathrooms the listing has (ex. 2 full 
  display: none;
 }
 /*end of important*/
-
-
 </style>
 
 <script>
 jQuery.noConflict();
 (function( $ ) {
- $(function() {
 
  //get 3rd listing
  //$('#feature_listings .row').eq(0).html('');
@@ -55,39 +52,37 @@ jQuery.noConflict();
  /*custom HTML for featured listings*/ 
  var link, image, address, price, area, bedroom, bathroom, newHTML;
  $('#feature_listings .item').each(function(index){
- link = $(this).children('.address').children('a').attr('href');
- image = $(this).children('a').children('img').attr('src');
- address = $.trim($(this).children('.address').children('a').html());
- price = $(this).children('.listing-meta').children('.price').html();
- area = $(this).children('.listing-meta').children('.wlisting-detail').children('.area').html();
- bedroom = $(this).children('.listing-meta').children('.wlisting-detail').children('.bedroom').html();
- bathroom = $(this).children('.listing-meta').children('.wlisting-detail').children('.bathroom').html();
+	 link = $(this).children('.address').children('a').attr('href');
+	 image = $(this).children('a').children('img').attr('src');
+	 address = $.trim($(this).children('.address').children('a').html());
+	 price = $(this).children('.listing-meta').children('.price').html();
+	 area = $(this).children('.listing-meta').children('.wlisting-detail').children('.area').html();
+	 bedroom = $(this).children('.listing-meta').children('.wlisting-detail').children('.bedroom').html();
+	 bathroom = $(this).children('.listing-meta').children('.wlisting-detail').children('.bathroom').html();
 
- $('.featured-custom .featured-link').attr('href',link);
- $('.featured-custom .featured-image').attr('src',image);
- $('.featured-custom .featured-image-background').css('background','url("'+image+'")');
- $('.featured-custom .featured-price').html(price);
- $('.featured-custom .featured-address').html(address);
- $('.featured-custom .featured-area').html(area);
- $('.featured-custom .featured-bedroom').html(bedroom);
- $('.featured-custom .featured-bathroom').html(bathroom);
- $(this).html($('.featured-custom').html());
- /*end of custom HTML for featured listings*/
- 
- $(this).removeClass('col-md-4');
- $(this).addClass('col-md-6');
+	 $('.featured-custom .featured-link').attr('href',link);
+	 $('.featured-custom .featured-image').attr('src',image);
+	 $('.featured-custom .featured-image-background').css('background','url("'+image+'")');
+	 $('.featured-custom .featured-price').html(price);
+	 $('.featured-custom .featured-address').html(address);
+	 $('.featured-custom .featured-area').html(area);
+	 $('.featured-custom .featured-bedroom').html(bedroom);
+	 $('.featured-custom .featured-bathroom').html(bathroom);
+	 $(this).html($('.featured-custom').html());
+	 /*end of custom HTML for featured listings*/
+	 
+	 $(this).removeClass('col-md-4');
+	 $(this).addClass('col-md-6');
  });
  
- 
-
  //$(window).bind("load", function() {
  var rawForm = $('#form_search_board_listings_2').html();
- while(rawForm.indexOf('Select ') != -1) {
- rawForm = rawForm.replace('Select','');
+	 while(rawForm.indexOf('Select ') != -1) {
+	 rawForm = rawForm.replace('Select','');
  }
  $('#form_search_board_listings_2').html(""+rawForm);
- //});
+
  
- });
-})(jQuery); 
+
+}); 
 </script>
